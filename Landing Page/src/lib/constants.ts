@@ -132,7 +132,7 @@ export const SCREENSHOTS = [
   { src: '/images/screenshot1.jpeg', label: 'Discover' },
   { src: '/images/screenshot2.jpeg', label: 'Swipe' },
   { src: '/images/screenshot3.jpeg', label: 'Plan' },
-  { src: '/images/screenshot4.jpeg', label: 'Groups' },
+  { src: '/images/screenshot4.jpeg', label: 'Group' },
   { src: '/images/screenshot5.jpeg', label: 'Trips' },
   { src: '/images/screenshot6.jpeg', label: 'Explore Cities' },
 ] as const
