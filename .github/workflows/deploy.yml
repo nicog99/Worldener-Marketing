@@ -1,0 +1,46 @@
+name: Deploy Worldener Marketing
+
+on:
+push:
+branches:
+- main
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: Checkout Repository
+    uses: actions/checkout@v4
+
+  - name: Setup Node
+    uses: actions/setup-node@v4
+    with:
+      node-version: 20
+
+  - name: Install Dependencies
+    run: npm ci
+
+  - name: Build Website
+    run: npm run build
+
+  - name: Clear Existing Files
+    uses: appleboy/ssh-action@v1.0.3
+    with:
+      host: ${{ secrets.EC2_HOST }}
+      username: ${{ secrets.EC2_USER }}
+      key: ${{ secrets.EC2_SSH_KEY }}
+      script: |
+        rm -rf /var/www/worldener/*
+
+  - name: Upload Build
+    uses: appleboy/scp-action@v0.1.7
+    with:
+      host: ${{ secrets.EC2_HOST }}
+      username: ${{ secrets.EC2_USER }}
+      key: ${{ secrets.EC2_SSH_KEY }}
+      source: "dist/*"
+      target: "/var/www/worldener"
+      strip_components: 1
+```
