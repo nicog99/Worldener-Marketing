@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": ">=18.18.0 <19"
+    "node": ">=18.18.0 <19",
+    "npm": ">=9.0.0"
+  },
+  "overrides": {
+    "eslint-visitor-keys": "4.2.1"
   },
   "scripts": {
     "dev": "vite",
@@ -20,23 +24,24 @@
     "lucide-react": "^1.21.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router-dom": "^7.18.0",
+    "react-router-dom": "^6.28.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@tailwindcss/vite": "^4.3.1",
-    "@types/node": "^18.19.0",
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^18.19.68",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
-    "eslint": "^10.3.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.6.0",
-    "tailwindcss": "^4.3.1",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.59.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.7.3",
+    "typescript-eslint": "^8.18.2",
     "vite": "^6.4.3"
   }
 }
