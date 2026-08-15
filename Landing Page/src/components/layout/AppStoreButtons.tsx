@@ -4,16 +4,31 @@ import { cn } from '@/lib/utils'
 
 type AppStoreButtonsProps = {
   className?: string
-  variant?: 'dark' | 'light'
+  variant?: 'dark' | 'light' | 'onYellow'
   layout?: 'row' | 'column'
 }
+
+const storeButtonClass = {
+  dark: {
+    apple: 'bg-primary text-heading',
+    play: 'border border-heading/20 bg-white text-heading',
+  },
+  light: {
+    apple: 'border border-white/30 bg-white text-heading',
+    play: 'border border-white/30 bg-transparent text-white',
+  },
+  onYellow: {
+    apple: 'bg-dark text-white',
+    play: 'border border-heading/20 bg-white text-heading',
+  },
+} as const
 
 export function AppStoreButtons({
   className,
   variant = 'dark',
   layout = 'row',
 }: AppStoreButtonsProps) {
-  const isDark = variant === 'dark'
+  const styles = storeButtonClass[variant]
 
   return (
     <div
@@ -22,23 +37,28 @@ export function AppStoreButtons({
         layout === 'column' ? 'flex-col' : 'flex-wrap',
         className,
       )}
-      id="download"
     >
       <a
         href={APP_LINKS.appStore}
         aria-label="Download on the App Store (link coming soon)"
         className={cn(
           'inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90',
-          isDark
-            ? 'bg-primary text-heading'
-            : 'border border-white/30 bg-white text-heading',
+          styles.apple,
         )}
         style={{ fontFamily: 'var(--font-heading)' }}
         onClick={(e) => {
           if (APP_LINKS.appStore === '#') e.preventDefault()
         }}
       >
-        <img src="/images/apple.png" alt="" className="h-5 w-5" />
+        <img
+          src={
+            variant === 'onYellow'
+              ? '/icons/apple-logo-white.png'
+              : '/icons/apple-logo-black.png'
+          }
+          alt=""
+          className="h-5 w-5 object-contain"
+        />
         App Store
       </a>
       <a
@@ -46,16 +66,14 @@ export function AppStoreButtons({
         aria-label="Get it on Google Play (link coming soon)"
         className={cn(
           'inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90',
-          isDark
-            ? 'border border-heading/20 bg-white text-heading'
-            : 'border border-white/30 bg-transparent text-white',
+          styles.play,
         )}
         style={{ fontFamily: 'var(--font-heading)' }}
         onClick={(e) => {
           if (APP_LINKS.googlePlay === '#') e.preventDefault()
         }}
       >
-        <img src="/images/playstore.png" alt="" className="h-5 w-5" />
+        <img src="/icons/playstore.png" alt="" className="h-5 w-5 object-contain" />
         Google Play
       </a>
     </div>
@@ -70,10 +88,18 @@ export function FooterAppLinks() {
   return (
     <div className="flex gap-4">
       <Link to="/#download">
-        <img src="/images/apple.png" alt="App Store" className="h-8 w-8 opacity-80 hover:opacity-100" />
+        <img
+          src="/icons/apple-logo-white.png"
+          alt="App Store"
+          className="h-8 w-8 object-contain opacity-80 hover:opacity-100"
+        />
       </Link>
       <Link to="/#download">
-        <img src="/images/playstore.png" alt="Google Play" className="h-8 w-8 opacity-80 hover:opacity-100" />
+        <img
+          src="/icons/playstore.png"
+          alt="Google Play"
+          className="h-8 w-8 object-contain opacity-80 hover:opacity-100"
+        />
       </Link>
     </div>
   )

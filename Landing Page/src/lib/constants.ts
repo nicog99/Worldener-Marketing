@@ -5,6 +5,8 @@ export const APP_LINKS = {
 
 export const COOKIEBOT_ID = '9b3e962a-8d0d-4fac-bd3f-ba58ea0688b1'
 
+export const SHOW_TEAM = false
+
 export const COMPANY = {
   name: 'Worldener GmbH',
   address: 'Rebenstrasse 12, 4112 Bättwil, Solothurn, Switzerland',
@@ -13,22 +15,50 @@ export const COMPANY = {
 } as const
 
 export const NAV_LINKS = [
-  { label: 'About', href: '/#about' },
-  { label: 'How It Works', href: '/#how-it-works' },
-  { label: 'Sneak Peek', href: '/#sneak-peek' },
-  { label: 'Team', href: '/#team' },
+  { label: 'Features', href: '/#features' },
+  { label: 'How it works', href: '/#how-it-works' },
   { label: 'Blog', href: '/blog' },
+  { label: 'About us', href: '/#about' },
   { label: 'FAQs', href: '/faqs' },
 ] as const
 
-export const FOOTER_LINKS = [
-  { label: 'About Us', href: '/#about' },
-  { label: 'How It Works', href: '/#how-it-works' },
-  { label: 'Sneak Peek', href: '/#sneak-peek' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Terms of Service', href: '/terms-of-service' },
-  { label: 'Privacy Policy', href: '/privacy-policy' },
-  { label: 'FAQs', href: '/faqs' },
+export const FOOTER_COLUMNS = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'Features', href: '/#features' },
+      { label: 'How it works', href: '/#how-it-works' },
+      { label: 'Download', href: '/#download' },
+    ],
+  },
+  {
+    title: 'Resources',
+    links: [
+      { label: 'Blog', href: '/blog' },
+      { label: 'FAQs', href: '/faqs' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About us', href: '/#about' },
+      { label: 'Contact', href: 'mailto:info@worldener.com' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms of Service', href: '/terms-of-service' },
+    ],
+  },
+] as const
+
+export const SOCIAL_LINKS = [
+  { label: 'Instagram', href: '#', icon: '/icons/instagram.png' },
+  { label: 'TikTok', href: '#', icon: '/icons/tik-tok.png' },
+  { label: 'YouTube', href: '#', icon: '/icons/youtube.png' },
+  { label: 'LinkedIn', href: '#', icon: '/icons/linkedin.png' },
 ] as const
 
 export const STATS = [
@@ -70,35 +100,50 @@ export const HOW_IT_WORKS = [
 
 export const FEATURES = [
   {
-    title: 'Personalized travel planning',
-    description:
-      'Algorithms assess your preferences and interests to craft bespoke itineraries tailored to your tastes.',
+    title: 'Discover',
+    description: 'Find personalized recommendations',
+    icon: '/icons/discover.png',
   },
   {
-    title: 'Swipe to discover',
-    description:
-      'Effortlessly browse and select travel options that appeal to you, making planning enjoyable and fast.',
+    title: 'Group Chat',
+    description: 'Chat, share ideas, and plan together',
+    icon: '/icons/group-chat.png',
   },
   {
-    title: 'Shared planning boards',
-    description:
-      'Create and manage travel groups with collaborative itinerary planning and decision-making tools.',
+    title: 'Compare',
+    description: 'Compare options and vote',
+    icon: '/icons/compare.png',
   },
   {
-    title: 'Compare plans',
-    description:
-      'Evaluate different travel plans side by side to reach consensus — especially useful for larger groups.',
+    title: 'Plan & Book',
+    description: 'Book experiences, hotels, and more',
+    icon: '/icons/plan-book.png',
   },
   {
-    title: 'Interactive group chat',
-    description:
-      'Communicate with fellow travelers in real time to share ideas and refine your perfect trip.',
+    title: 'Remember',
+    description: 'Collect memories and photos',
+    icon: '/icons/remember.png',
   },
   {
-    title: 'Hidden gems',
-    description:
-      'Discover not only the obvious attractions but also the secret spots each destination has to offer.',
+    title: 'AI Assistant',
+    description: 'Get smart suggestions from a personal travel assistant',
+    icon: '/icons/ai-assistant.png',
   },
+] as const
+
+export const PROBLEM_ICONS = [
+  { src: '/icons/whatsapp.png', label: 'WhatsApp', className: 'left-[8%] top-[8%]' },
+  { src: '/icons/instagram.png', label: 'Instagram', className: 'right-[12%] top-[4%]' },
+  { src: '/icons/tik-tok.png', label: 'TikTok', className: 'left-[42%] top-[28%]' },
+  { src: '/icons/google-maps.png', label: 'Google Maps', className: 'left-[4%] bottom-[18%]' },
+  { src: '/icons/pinterest.png', label: 'Pinterest', className: 'right-[8%] top-[42%]' },
+  { src: '/icons/google-calendar.png', label: 'Google Calendar', className: 'right-[28%] bottom-[8%]' },
+] as const
+
+export const CTA_VALUE_PROPS = [
+  { title: 'Top activities', icon: '/icons/star.png' },
+  { title: 'Secure payments', icon: '/icons/shield.png' },
+  { title: 'Travel experiences', icon: '/icons/globe.png' },
 ] as const
 
 export const TEAM = [
@@ -134,7 +179,7 @@ export const SCREENSHOTS = [
   { src: '/images/screenshot3.jpeg', label: 'Plan' },
   { src: '/images/screenshot4.jpeg', label: 'Group' },
   { src: '/images/screenshot5.jpeg', label: 'Trips' },
-  { src: '/images/screenshot6.jpeg', label: 'Explore Cities' },
+  { src: '/images/screenshot6.jpeg', label: 'Explore' },
 ] as const
 
 export const ABOUT_IMAGES = [
@@ -148,9 +193,8 @@ export const ABOUT_IMAGES = [
 
 export const HOME_SECTIONS = [
   { id: 'about', label: 'About' },
-  { id: 'how-it-works', label: 'How It Works' },
-  { id: 'sneak-peek', label: 'Sneak Peek' },
-  { id: 'team', label: 'Team' },
   { id: 'features', label: 'Features' },
+  { id: 'how-it-works', label: 'How it works' },
+  { id: 'blog-preview', label: 'Blog' },
   { id: 'cta', label: 'Download' },
 ] as const

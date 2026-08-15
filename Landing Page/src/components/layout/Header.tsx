@@ -39,7 +39,7 @@ export function Header() {
               className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-heading transition-opacity hover:opacity-90"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              Download
+              Download the App
             </a>
           ) : (
             <Link
@@ -47,7 +47,7 @@ export function Header() {
               className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-heading transition-opacity hover:opacity-90"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              Download
+              Download the App
             </Link>
           )}
         </nav>

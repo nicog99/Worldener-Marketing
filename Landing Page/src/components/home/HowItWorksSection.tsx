@@ -1,53 +1,43 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { HOW_IT_WORKS } from '@/lib/constants'
-import { ScrollReveal, StaggerItem, StaggerReveal } from '@/components/ui/ScrollReveal'
+import { SCREENSHOTS } from '@/lib/constants'
+import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 export function HowItWorksSection() {
-  const prefersReducedMotion = useReducedMotion()
-
   return (
     <section id="how-it-works" className="bg-secondary py-20 md:py-28">
       <div className="container-main">
         <ScrollReveal className="mb-12 max-w-2xl">
-          <p className="section-label mb-3">How It Works</p>
-          <h2 className="section-heading">
-            Everything you need to go from idea to itinerary
-          </h2>
+          <p className="section-label mb-3">See it in action</p>
+          <h2 className="section-heading mb-4">From idea to unforgettable in one app.</h2>
+          <p className="text-base leading-relaxed md:text-lg">
+            Every step of your journey, together with your people.
+          </p>
         </ScrollReveal>
+      </div>
 
-        <StaggerReveal className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.12}>
-          {HOW_IT_WORKS.map((item) => (
-            <StaggerItem key={item.step}>
-              <motion.article
-                whileHover={
-                  prefersReducedMotion
-                    ? undefined
-                    : { y: -6, boxShadow: '0 12px 32px rgba(0,0,0,0.08)' }
-                }
-                transition={{ duration: 0.25 }}
-                className="card-surface flex h-full flex-col p-6"
-              >
-                <div className="mb-4 flex items-center gap-3">
-                  <span
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-heading"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
-                    {item.step}
-                  </span>
-                  <img src={item.icon} alt="" className="h-8 w-8 object-contain" />
+      <ScrollReveal delay={0.15}>
+        <div className="overflow-x-auto pb-4">
+          <div className="mx-auto flex w-max gap-4 px-5 md:gap-6 md:px-8">
+            {SCREENSHOTS.map((shot) => (
+              <figure key={shot.src} className="w-[180px] shrink-0 sm:w-[200px] md:w-[220px]">
+                <div className="overflow-hidden rounded-[1.75rem] bg-white p-2 shadow-sm">
+                  <img
+                    src={shot.src}
+                    alt={`Worldener app — ${shot.label}`}
+                    className="aspect-[9/16] w-full rounded-[1.35rem] object-cover object-top"
+                    loading="lazy"
+                  />
                 </div>
-                <h3
-                  className="mb-3 text-lg font-semibold text-heading"
+                <figcaption
+                  className="mt-3 text-center text-sm font-semibold text-heading"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {item.title}
-                </h3>
-                <p className="flex-1 text-sm leading-relaxed">{item.description}</p>
-              </motion.article>
-            </StaggerItem>
-          ))}
-        </StaggerReveal>
-      </div>
+                  {shot.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </ScrollReveal>
     </section>
   )
 }
