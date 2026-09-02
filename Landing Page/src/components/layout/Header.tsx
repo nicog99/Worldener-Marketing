@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '@/lib/constants'
@@ -14,59 +14,84 @@ export function Header() {
 
   const isHome = location.pathname === '/'
 
+  useEffect(() => {
+    if (!open) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md relative">
-      <ScrollProgress />
-      <div className="container-main flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2" onClick={handleNavClick}>
-          <img src="/images/logo.png" alt="Worldener" className="h-9 w-auto md:h-10" />
-        </Link>
+    <header className="sticky top-0 z-50">
+      {/* Keep backdrop-blur off <header> so the fixed menu is viewport-positioned. */}
+      <div className="relative border-b border-black/5 bg-white/95 backdrop-blur-md">
+        <ScrollProgress />
+        <div className="container-main flex h-16 items-center justify-between md:h-20">
+          <Link to="/" className="flex items-center gap-2" onClick={handleNavClick}>
+            <img src="/images/logo.png" alt="Worldener" className="h-9 w-auto md:h-10" />
+          </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className="text-sm font-medium text-heading transition-colors hover:text-accent"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          {isHome ? (
-            <a
-              href="#download"
-              className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-heading transition-opacity hover:opacity-90"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              Download the App
-            </a>
-          ) : (
-            <Link
-              to="/#download"
-              className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-heading transition-opacity hover:opacity-90"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              Download the App
-            </Link>
-          )}
-        </nav>
+          <nav className="hidden items-center gap-8 lg:flex">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm font-medium text-heading transition-colors hover:text-accent"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                {link.label}
+              </Link>
+            ))}
+            {isHome ? (
+              <a
+                href="#download"
+                className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-heading transition-opacity hover:opacity-90"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                Download the App
+              </a>
+            ) : (
+              <Link
+                to="/#download"
+                className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-heading transition-opacity hover:opacity-90"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                Download the App
+              </Link>
+            )}
+          </nav>
 
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-heading lg:hidden"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-heading lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <div
+        id="mobile-menu"
         className={cn(
-          'fixed inset-0 top-16 z-40 bg-white transition-transform duration-300 lg:hidden',
-          open ? 'translate-x-0' : 'translate-x-full',
+          'fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-white transition-transform duration-300 md:top-20 lg:hidden',
+          open ? 'translate-x-0' : 'pointer-events-none translate-x-full',
         )}
+        aria-hidden={!open}
       >
         <nav className="flex flex-col gap-1 p-6">
           {NAV_LINKS.map((link) => (
